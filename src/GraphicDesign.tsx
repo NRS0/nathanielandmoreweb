@@ -78,7 +78,7 @@ export default function GraphicDesign() {
 
       {/* Gallery Grid */}
       <main className="flex-grow p-6 md:p-12 lg:p-20 max-w-screen-2xl mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {realImages.map((img, index) => (
             <motion.div 
               key={index}

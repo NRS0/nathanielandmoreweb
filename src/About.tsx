@@ -44,7 +44,7 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="w-full flex flex-col items-center"
         >
-          <div className="w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%] max-w-[320px] mb-20">
+          <div className="w-[96%] sm:w-[80%] md:w-[64%] lg:w-[48%] max-w-[512px] mb-20">
             <img 
               src={isHovered ? hoverImage : defaultImage} 
               alt="About Image" 
