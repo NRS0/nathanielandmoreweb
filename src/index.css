@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+  overflow-x: hidden;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='16' y='24' font-family='sans-serif' font-size='32' font-weight='900' text-anchor='middle' fill='%23FF6321'%3E*%3C/text%3E%3C/svg%3E") 16 16, auto;
+}
+
+button, a, [role="button"], .cursor-pointer {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='16' y='24' font-family='sans-serif' font-size='32' font-weight='900' text-anchor='middle' fill='%23FF6321'%3E*%3C/text%3E%3C/svg%3E") 16 16, pointer !important;
+}
