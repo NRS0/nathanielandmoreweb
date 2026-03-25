@@ -26,7 +26,7 @@ export default function About() {
         <div className="flex items-center gap-2 md:gap-4">
           <a 
             href="mailto:nathaniel30012@gmail.com" 
-            className="p-2 -m-2 text-[8px] sm:text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
+            className="hidden sm:block p-2 -m-2 text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
           >
             nathaniel30012@gmail.com
           </a>

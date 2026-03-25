@@ -51,7 +51,7 @@ function Home() {
         <div className="flex items-center gap-1 md:gap-2">
           <a 
             href="mailto:nathaniel30012@gmail.com" 
-            className="p-4 -m-4 text-[8px] sm:text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
+            className="hidden sm:block p-4 -m-4 text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
           >
             nathaniel30012@gmail.com
           </a>
