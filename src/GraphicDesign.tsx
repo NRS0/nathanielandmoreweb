@@ -4,11 +4,14 @@ import { motion } from "motion/react";
 
 const realImages = [
   "https://framerusercontent.com/images/POfBNZZ9BVjYT4OMgMxVnV04XQM.png?scale-down-to=2048&width=2155&height=2082",
-  "https://i.pinimg.com/736x/2f/bd/f4/2fbdf467e644d0fe459c55c6d66052cd.jpg",
+  "https://i.pinimg.com/736x/f0/a4/12/f0a412c63f5147cf60ae08fd1d452ed9.jpg",
   "https://i.pinimg.com/736x/da/1a/59/da1a599aa21f959af53213d4a51de0fc.jpg",
   "https://i.pinimg.com/736x/c9/94/23/c9942316fdcd913263996395181354cc.jpg",
   "https://i.pinimg.com/736x/76/48/6e/76486e0ad302b8ee302c18b5d195482f.jpg",
-  "https://i.pinimg.com/474x/55/e6/62/55e6621b03aef9789f27862036df7178.jpg"
+  "https://i.pinimg.com/474x/55/e6/62/55e6621b03aef9789f27862036df7178.jpg",
+  "https://i.pinimg.com/736x/54/c6/36/54c636b63f0056572a8b049a755b2c83.jpg",
+  "https://i.pinimg.com/736x/b4/cd/08/b4cd08e46dd76292154b35d52886219d.jpg",
+  "https://i.pinimg.com/736x/e7/ab/58/e7ab58edb8bb8838bdf7325a76ace96a.jpg"
 ];
 
 export default function GraphicDesign() {
