@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Plus, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import GraphicDesign from "./GraphicDesign";
 import Photography from "./Photography";
 import About from "./About";
@@ -253,6 +254,7 @@ export default function App() {
         <Route path="/photography" element={<Photography />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
