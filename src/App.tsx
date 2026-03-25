@@ -36,9 +36,9 @@ function Home() {
   const imageHoverImage = "https://i.pinimg.com/736x/0d/7f/ff/0d7fffb845b4218d2a28ba613a6d2cdf.jpg";
   const leftImageHoverImage = "https://i.pinimg.com/736x/e7/5d/c9/e75dc95913c6476c4395317e76be62c1.jpg";
   const rightImageHoverImage = "https://i.pinimg.com/736x/4c/79/ae/4c79ae3306a41c906b43762ca67182c0.jpg";
-  const photographyHoverImage = "https://previews.dropbox.com/p/thumb/AC-qsL-15DrYvb5sJun-YEsGq_M8DBUbycU6x3tMGQJchrTNAzHCf_gTxfVm1TThe47Z-2D_zrM4cV7AwEUONmEeqCes7T12063RscSffsQdp4x2t-GfUcaX4jIhkeynbREABmEh9lyEmkkQ8iylHUHSBRz7_Yp99ljXxaSTWMXn1hJSdmffArQ223FWccRtacpO4GeH-87hg4VDrEeglzQmGUavpukztILI3N8mOVyrWBOot6NT4edVI9k6wyQViFJ0a1uPfe8iurir99QOltoUlNePVHs_Dd46DfOcgaVTQw/p.jpeg";
-  const graphicDesignHoverImage = "https://previews.dropbox.com/p/thumb/AC-w32xFK2piT9CUrrWL9Ry3ls6ektp5tFf_FIN3CUh8_NM4cdolDahyh8XMHzGhoJ5hcONhkeCvAP5Kp_rUcLYNDp2LYy04uKpcRVHLjJw_JeOP3qqIw9xpoonSC48ITqPlb7S_MnMualGQQ89yGjoxpyhq4k4GxIMtsExHWYjHoB6_jE3cFRueUtwMxGIPO_1BZmCDSzN9lkXRhJw6MDC-6F__huNyDIoWlRMONQOTR6OfbXZC9dGvwB9DZMS2vQm-G_oB2OT2WyAVKWXQNSVrTKE4jorAPGYkXXScc1mtsg/p.jpeg";
-  const aboutHoverImage = "https://previews.dropbox.com/p/thumb/AC8IOlXV5Y97tJu9dVsTEXVgTXkYXBzM9j87yS8TN8_-wRQcVMPD6aneHQyINe3MO14TeEdt_6cY02EXpZ7kHrLUAYX-vb3mSGiGQqz06xFwUnnmM-6_naGFFe8i0oe2n33gAwxbjK05W5gOHVSJPBLyVM4c7fzVFVK5Dm1EJPHtGPLZBVhmnNenC0UYaA8T0s4tjCpUqivEJGSLv2nNyrYBU_eUFk1WMolsNVux5__UxIHVjsYGZP7xPaLcALQr8Debngh1texsrHcDWtio_IN9N9Z252ePwbvgdyxeQjAgUw/p.jpeg";
+  const photographyHoverImage = "https://i.pinimg.com/736x/37/e5/a9/37e5a93a5f46a47e5060e894df1d98af.jpg";
+  const graphicDesignHoverImage = "https://i.pinimg.com/736x/17/29/7a/17297aff063ddfb35504831a5de845b8.jpg";
+  const aboutHoverImage = "https://i.pinimg.com/736x/76/8c/0a/768c0aa24b6e60a35f59dd2f88865321.jpg";
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white flex flex-col relative">

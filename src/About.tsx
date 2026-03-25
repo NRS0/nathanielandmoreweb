@@ -6,8 +6,8 @@ import { motion } from "motion/react";
 export default function About() {
   const [isHovered, setIsHovered] = useState(false);
   
-  const defaultImage = "https://previews.dropbox.com/p/thumb/AC-RUL4b_32xClJfAjTxJRJckf3kTo7SWiiLrw_cDp7iJGYwwS3ro-9oopMgza3JhL2jHuOSxq0jyJEnnNuEqh75XhGWpYJVvp4uWXF6UsUBF2egH2zQNJxgo4Ow2wgLdiSq7j4L-_mnz9Pzx2K6C-i2qJBrBIH3hIbc8ej9vlF-ie9FqYBS7j4EosRcPvij9pSgvge9W_PBOo8VaOwrRVAMP2GvQIEo5bY60LRZi5yE3rHTjle65QauSCUDZ9_GROvn6pTycFzVnVaftwuBoTz7A-xrxDEUTAIF6vmkmDnWUg/p.jpeg";
-  const hoverImage = "https://previews.dropbox.com/p/thumb/AC-0Pp4jb5Dq6byNqviWbvBYt10FsRmE0yO2KblKbCjh9qWP-Y3Q_jhLyBrDYfM3Uj04ZvXlbus1AyeJbyzh4hx_IrsbvconBBE1hMj_F_G3Yq5DsuHbpmuTLeCAiThFoOKcMGsExc-xuWouQmUUYf8h8vXRyPkRhPDVIcCasADV-NsSMGH5oQDA7pCtm3j9padZY6O7sOTrfiz2RaPB7s9OeJ5Y6AQZR-BCiMB-BQ5v_SijBkPcQReBw8RsgSlEvg4zQ0i5QmZx0vnG4S63ReVXhaiSZdhIvPNwWo2o8uBtrg/p.jpeg";
+  const defaultImage = "https://i.pinimg.com/736x/f8/d6/5e/f8d65e8047729f8be8c2bf2841332a3e.jpg";
+  const hoverImage = "https://i.pinimg.com/736x/11/12/a5/1112a5fe571a764082a5ad9efe731c71.jpg";
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white flex flex-col relative">

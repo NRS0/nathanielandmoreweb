@@ -8,8 +8,15 @@ const photographyImages = [
   "https://framerusercontent.com/images/JMTUj2KvbJNSYO6rbHDHb0upt7g.jpg?scale-down-to=2048&width=4160&height=5025",
   "https://framerusercontent.com/images/vrQewI18sl2oI1vIzJxVQ2avoE.jpg?scale-down-to=4096&width=4160&height=6240",
   "https://framerusercontent.com/images/SGGDKTsL5MUVZzeWdmN6kADpA.jpg?scale-down-to=4096&width=4160&height=6240",
-  "https://previews.dropbox.com/p/thumb/AC_-yrNbRxxnzzQToScQ_fNLvFNPnv4DDO91fFM8sQAOgQVgFcPZSkZnZYWpm406S_VGUrEWI6GeTRM25BseKNRcItUMXJO0cxlfXAaGbYQFcrO9ERxMzljlI_KiCtm2Y-1vWxX-IYw1L3Wxat8zYbVDR3RVFgY59kbBEsz04fgMduNHqWjF5Yjbwci_tsrR_Nv0FLsnqPQQxEyXG7MJ3aU7HggyWtrrI34ia67G8L5qTONro1N5DeIEf5jFjklwcHmGFY--2kMxwnFwRCQGLrNtWsyMp-UWF5gIAnJ22XfMSg/p.jpeg",
-  "https://previews.dropbox.com/p/thumb/AC_gJKTL1JSPTkh3Exn8CcctmhQxp_Oc6PdtDa5ZCsInvjJAOx5-z-46gxIIFwjD1aHZ1hVJUJGP8WyC1To5Yt-8Q40fzGXwyh_bhZSya8-UjbwQpETpjhsd0Fm8DzLzd03dNYRQzRDoILVa91DCmvegFqW-dgs1U60YgPZcAPpXyNlr1jA1i4cfC0UguFQ6VWVwHO3JxPRGBxGLljgDUqROeBGuafxW2Gmx8sbGfenr1dB1vKjY-NV-mi5vdNsYNqt5C8KH3hLK3jskpapaAoiVbAK8Fam2T12SfbljZTjvdg/p.jpeg"
+  "https://i.pinimg.com/474x/b1/ac/78/b1ac781f6715a2be58f7cb2c5a7db022.jpg",
+  "https://i.pinimg.com/736x/e5/34/44/e53444fc5deeaa6cfc2439d19822d72d.jpg",
+  "https://i.pinimg.com/736x/51/4e/81/514e8144405b432fe0c2f02f2cfd9d34.jpg",
+  "https://i.pinimg.com/736x/af/13/3a/af133ad3d2cd61c2a269e9b94198c879.jpg",
+  "https://i.pinimg.com/736x/a9/26/7b/a9267ba7ccb74e797fe1fe1d1bbead38.jpg",
+  "https://i.pinimg.com/736x/44/0d/e0/440de037830a1df599c01478f6b28f7c.jpg",
+  "https://i.pinimg.com/736x/22/b7/cc/22b7cc3eead553e3dea7444fcda681d9.jpg",
+  "https://i.pinimg.com/736x/fc/7f/e2/fc7fe22118c203d7b265f5d67e1b992f.jpg",
+  "https://i.pinimg.com/736x/2f/bd/f4/2fbdf467e644d0fe459c55c6d66052cd.jpg"
 ];
 
 export default function Photography() {
