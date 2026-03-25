@@ -42,23 +42,30 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white flex flex-col relative">
-      {/* Top Left Neon Text */}
-      <div className="absolute top-6 left-6 md:top-8 md:left-8 z-50">
-        <Link to="/" className="inline-block p-4 -m-4 text-[12px] md:text-base font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity">NATHANIELANDMORE</Link>
-      </div>
+      {/* Header */}
+      <header className="px-6 py-4 md:p-8 flex justify-between items-center sticky top-0 bg-white/80 backdrop-blur-md z-50">
+        <div className="flex items-center gap-2 md:gap-4">
+          <Link to="/" className="inline-block p-4 -m-4 text-[12px] md:text-base font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity">NATHANIELANDMORE</Link>
+        </div>
 
-      {/* Upper Right Plus Icon & Email */}
-      <div className="absolute top-6 right-6 md:top-8 md:right-8 z-50 flex items-center gap-1 md:gap-2">
-        <a 
-          href="mailto:nathaniel30012@gmail.com" 
-          className="hidden sm:block p-4 -m-4 text-[10px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
-        >
-          nathaniel30012@gmail.com
-        </a>
-        <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity">
-          <Plus size={24} className="md:w-7 md:h-7" strokeWidth={2.5} />
-        </a>
-      </div>
+        <div className="flex items-center gap-1 md:gap-2">
+          <a 
+            href="mailto:nathaniel30012@gmail.com" 
+            className="p-4 -m-4 text-[8px] sm:text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
+          >
+            nathaniel30012@gmail.com
+          </a>
+          <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity">
+            <motion.div
+              whileHover={{ rotate: 90 }}
+              whileTap={{ rotate: 360 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            >
+              <Plus size={24} className="md:w-7 md:h-7" strokeWidth={2.5} />
+            </motion.div>
+          </a>
+        </div>
+      </header>
 
       {/* Right Side Text - Vertical Marquee */}
       <div className="absolute right-1 top-0 bottom-0 overflow-hidden z-50 w-4 hidden sm:flex flex-col items-center">
@@ -108,7 +115,7 @@ function Home() {
       </div>
 
       {/* Menu Area - Morphing Animation */}
-      <div className="pt-24 md:pt-8 flex justify-center relative z-50">
+      <div className="pt-8 flex justify-center relative z-50">
         <motion.div 
           layout
           initial={false}

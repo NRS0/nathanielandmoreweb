@@ -37,12 +37,18 @@ export default function Photography() {
         <div className="flex items-center gap-2 md:gap-4">
           <a 
             href="mailto:nathaniel30012@gmail.com" 
-            className="hidden sm:block p-2 -m-2 text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
+            className="p-2 -m-2 text-[8px] sm:text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
           >
             nathaniel30012@gmail.com
           </a>
           <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity">
-            <Plus size={24} className="md:w-7 md:h-7" strokeWidth={2.5} />
+            <motion.div
+              whileHover={{ rotate: 90 }}
+              whileTap={{ rotate: 360 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            >
+              <Plus size={24} className="md:w-7 md:h-7" strokeWidth={2.5} />
+            </motion.div>
           </a>
         </div>
       </header>
