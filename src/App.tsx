@@ -7,7 +7,6 @@ import { useState } from "react";
 import { Plus, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { Analytics } from "@vercel/analytics/react";
 import GraphicDesign from "./GraphicDesign";
 import Photography from "./Photography";
 import About from "./About";
@@ -45,19 +44,19 @@ function Home() {
     <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white flex flex-col relative">
       {/* Top Left Neon Text */}
       <div className="absolute top-6 left-6 md:top-8 md:left-8 z-50">
-        <Link to="/" className="inline-block p-2 -m-2 text-[10px] md:text-base font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity">NATHANIELANDMORE</Link>
+        <Link to="/" className="inline-block p-4 -m-4 text-[12px] md:text-base font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity">NATHANIELANDMORE</Link>
       </div>
 
       {/* Upper Right Plus Icon & Email */}
       <div className="absolute top-6 right-6 md:top-8 md:right-8 z-50 flex items-center gap-1 md:gap-2">
         <a 
           href="mailto:nathaniel30012@gmail.com" 
-          className="hidden sm:block p-2 -m-2 text-[8px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
+          className="hidden sm:block p-4 -m-4 text-[10px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity"
         >
           nathaniel30012@gmail.com
         </a>
-        <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-2 -m-2 block hover:opacity-70 transition-opacity">
-          <Plus size={20} className="md:w-7 md:h-7" strokeWidth={2.5} />
+        <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity">
+          <Plus size={24} className="md:w-7 md:h-7" strokeWidth={2.5} />
         </a>
       </div>
 
@@ -113,7 +112,7 @@ function Home() {
         <motion.div 
           layout
           initial={false}
-          className={`bg-black text-white shadow-2xl border border-white/10 flex flex-col md:flex-row items-center overflow-hidden ${isMenuOpen ? 'rounded-[2rem] md:rounded-full p-2' : 'rounded-full w-12 h-12'}`}
+          className={`bg-black text-white shadow-2xl border border-white/10 flex flex-col md:flex-row items-center overflow-hidden ${isMenuOpen ? 'rounded-[2rem] md:rounded-full p-1' : 'rounded-full w-14 h-14'}`}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
         >
           <div className="flex flex-col md:flex-row items-center">
@@ -121,9 +120,9 @@ function Home() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               onMouseEnter={() => setIsMenuHovered(true)}
               onMouseLeave={() => setIsMenuHovered(false)}
-              className={`flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity ${isMenuOpen ? 'w-10 h-10' : 'w-12 h-12'}`}
+              className="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity w-14 h-14"
             >
-              {isMenuOpen ? <X size={18} /> : <Menu size={20} />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             
             <AnimatePresence>
@@ -144,7 +143,7 @@ function Home() {
                       >
                         <Link
                           to={category === "Graphic Design" ? "/graphic-design" : (category === "Photography" ? "/photography" : (category === "About" ? "/about" : `#${category.toLowerCase().replace(' ', '-')}`))}
-                          className="px-6 py-4 text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] transition-all whitespace-nowrap block"
+                          className="px-8 py-5 text-[12px] md:text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all whitespace-nowrap block"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {category}
@@ -164,7 +163,7 @@ function Home() {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-6 py-4 text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] transition-all whitespace-nowrap block"
+                          className="px-8 py-5 text-[12px] md:text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all whitespace-nowrap block"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {link.name}
@@ -196,6 +195,7 @@ function Home() {
             onMouseLeave={() => setIsImageHovered(false)}
             className="w-full h-full object-contain block"
             referrerPolicy="no-referrer"
+            loading="lazy"
           />
         </Link>
       </main>
@@ -233,7 +233,7 @@ function Home() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase hover:text-[#b7ff00] transition-all duration-300"
+                className="p-4 text-[11px] md:text-xs font-bold tracking-[0.5em] uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all duration-300"
               >
                 {link.name}
               </a>
@@ -254,7 +254,6 @@ export default function App() {
         <Route path="/photography" element={<Photography />} />
         <Route path="/about" element={<About />} />
       </Routes>
-      <Analytics />
     </BrowserRouter>
   );
 }

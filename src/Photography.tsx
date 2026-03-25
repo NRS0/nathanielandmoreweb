@@ -21,11 +21,11 @@ export default function Photography() {
       {/* Header */}
       <header className="px-6 py-4 md:p-8 flex justify-between items-center sticky top-0 bg-white/80 backdrop-blur-md z-50">
         <div className="flex items-center gap-2 md:gap-4">
-          <Link to="/" className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase hover:text-[#b7ff00] transition-all p-4 -m-4">
-            <ArrowLeft size={18} />
+          <Link to="/" className="flex items-center gap-2 text-[14px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all p-4 -m-4">
+            <ArrowLeft size={20} />
             <span className="hidden md:inline">Back</span>
           </Link>
-          <Link to="/" className="inline-block p-2 -m-2 text-[12px] md:text-sm font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity">NATHANIELANDMORE</Link>
+          <Link to="/" className="inline-block p-4 -m-4 text-[14px] md:text-sm font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[#b7ff00] hover:opacity-70 transition-opacity">NATHANIELANDMORE</Link>
         </div>
         
         <h1 className="hidden lg:block text-sm font-bold tracking-[0.4em] uppercase">Photography</h1>
@@ -60,6 +60,7 @@ export default function Photography() {
                 alt={`Photography ${index + 1}`}
                 className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
+                loading="lazy"
               />
             </motion.div>
           ))}
@@ -70,8 +71,8 @@ export default function Photography() {
       <footer className="p-12 border-t border-neutral-100 flex flex-col items-center gap-6 max-w-screen-2xl mx-auto w-full">
         <p className="text-[10px] font-bold tracking-[0.5em] uppercase opacity-40">© Nathaniel Springer</p>
         <div className="flex gap-4 md:gap-8">
-          <a href="https://www.instagram.com/nathanielandmore/" target="_blank" rel="noopener noreferrer" className="p-3 text-[10px] font-bold tracking-widest uppercase hover:text-[#b7ff00] transition-all">Instagram</a>
-          <a href="https://www.linkedin.com/in/nathaniel-springer-/" target="_blank" rel="noopener noreferrer" className="p-3 text-[10px] font-bold tracking-widest uppercase hover:text-[#b7ff00] transition-all">LinkedIn</a>
+          <a href="https://www.instagram.com/nathanielandmore/" target="_blank" rel="noopener noreferrer" className="p-4 text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all">Instagram</a>
+          <a href="https://www.linkedin.com/in/nathaniel-springer-/" target="_blank" rel="noopener noreferrer" className="p-4 text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all">LinkedIn</a>
         </div>
       </footer>
     </div>
