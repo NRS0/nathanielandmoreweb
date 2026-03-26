@@ -3,13 +3,162 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Plus, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import GraphicDesign from "./GraphicDesign";
 import Photography from "./Photography";
 import About from "./About";
+
+const Preloader = React.memo(function Preloader() {
+  const [phase, setPhase] = useState<'dipping' | 'circular' | 'converging' | 'scattering'>('dipping');
+  const [bgColor, setBgColor] = useState("#FFFFFF");
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase('circular'), 700);
+    const t2 = setTimeout(() => setPhase('converging'), 1300);
+    const t3 = setTimeout(() => setPhase('scattering'), 1600);
+    
+    // Sync background color changes
+    const c1 = setTimeout(() => setBgColor("#FF6321"), 600);
+    const c2 = setTimeout(() => setBgColor("#b7ff00"), 1200);
+
+    return () => {
+      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
+      clearTimeout(c1); clearTimeout(c2);
+    };
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, delay: 0.4 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden pointer-events-none"
+    >
+      {/* The Masked Background */}
+      <motion.div 
+        className="absolute inset-0"
+        animate={{ backgroundColor: bgColor }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        style={{
+          clipPath: phase === 'scattering' 
+            ? 'circle(0% at 50% 50%)' 
+            : 'circle(150% at 50% 50%)',
+          transition: 'clip-path 0.8s cubic-bezier(0.65, 0, 0.35, 1)',
+          willChange: 'clip-path'
+        }}
+      />
+
+      <motion.div 
+        className="relative flex items-center justify-center z-10"
+        animate={phase !== 'dipping' ? { rotate: 360 } : {}}
+        transition={phase !== 'dipping' ? { duration: 1, repeat: Infinity, ease: "linear" } : {}}
+        style={{ willChange: 'transform' }}
+      >
+        {[0, 1, 2].map((i) => {
+          const angle = (i * 120 * Math.PI) / 180;
+          const radius = 50;
+          const circleX = Math.cos(angle) * radius;
+          const circleY = Math.sin(angle) * radius;
+          
+          const scatterAngle = (i * 120 + 45) * Math.PI / 180;
+          const scatterDistance = 1500;
+          const scatterX = Math.cos(scatterAngle) * scatterDistance;
+          const scatterY = Math.sin(scatterAngle) * scatterDistance;
+
+          let animateProps: any = {};
+          let transitionProps: any = {};
+
+          if (phase === 'dipping') {
+            animateProps = { x: (i - 1) * 60, y: [0, -40, 0], scale: 1, opacity: 1 };
+            transitionProps = { 
+              y: { duration: 0.6, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" },
+              x: { duration: 0.4 },
+              scale: { duration: 0.4 }
+            };
+          } else if (phase === 'circular') {
+            animateProps = { x: circleX, y: circleY, scale: 1, opacity: 1 };
+            transitionProps = { duration: 0.4, ease: "backOut" };
+          } else if (phase === 'converging') {
+            animateProps = { x: 0, y: 0, scale: 1.5, opacity: 1 };
+            transitionProps = { duration: 0.3, ease: "anticipate" };
+          } else if (phase === 'scattering') {
+            animateProps = { x: scatterX, y: scatterY, scale: 0.5, opacity: 0 };
+            transitionProps = { duration: 0.8, ease: "circIn" };
+          }
+
+          return (
+            <motion.div
+              key={i}
+              animate={animateProps}
+              transition={transitionProps}
+              className="absolute w-8 h-8 md:w-10 md:h-10 rounded-full bg-black"
+              style={{ willChange: 'transform, opacity' }}
+            />
+          );
+        })}
+      </motion.div>
+    </motion.div>
+  );
+});
+
+const PageTransitionOverlay = React.memo(function PageTransitionOverlay() {
+  return (
+    <motion.div
+      className="fixed inset-0 z-[9998] pointer-events-none overflow-hidden flex items-center justify-center"
+    >
+      <motion.div
+        className="absolute inset-0 bg-[#b7ff00]"
+        variants={{
+          initial: { clipPath: 'circle(150% at 50% 50%)' },
+          animate: { clipPath: 'circle(0% at 50% 50%)' },
+          exit: { clipPath: 'circle(150% at 50% 50%)' }
+        }}
+        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
+        style={{ willChange: 'clip-path' }}
+      />
+      
+      <div className="relative flex items-center justify-center z-10">
+        {[0, 1, 2].map((i) => {
+          const scatterAngle = (i * 120 + 45) * Math.PI / 180;
+          const scatterDistance = 1500;
+          const scatterX = Math.cos(scatterAngle) * scatterDistance;
+          const scatterY = Math.sin(scatterAngle) * scatterDistance;
+
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-8 h-8 md:w-10 md:h-10 rounded-full bg-black"
+              variants={{
+                initial: { x: 0, y: 0, scale: 1.5, opacity: 1 },
+                animate: { x: scatterX, y: scatterY, scale: 0.5, opacity: 0 },
+                exit: { x: 0, y: 0, scale: 1.5, opacity: 1 }
+              }}
+              transition={{ duration: 0.6, ease: "circInOut" }}
+              style={{ willChange: 'transform, opacity' }}
+            />
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+});
+
+function TransitionWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="w-full"
+    >
+      {children}
+      <PageTransitionOverlay />
+    </motion.div>
+  );
+}
 
 function Home() {
   const [isMenuHovered, setIsMenuHovered] = useState(false);
@@ -55,7 +204,7 @@ function Home() {
           >
             nathaniel30012@gmail.com
           </a>
-          <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity">
+          <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity" aria-label="Send email">
             <motion.div
               whileHover={{ rotate: 90 }}
               whileTap={{ rotate: 360 }}
@@ -128,6 +277,7 @@ function Home() {
               onMouseEnter={() => setIsMenuHovered(true)}
               onMouseLeave={() => setIsMenuHovered(false)}
               className="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity w-14 h-14"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -252,15 +402,42 @@ function Home() {
   );
 }
 
+function AppRoutes() {
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Only show preloader on initial entry
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader key="preloader" />}
+      </AnimatePresence>
+      
+      <AnimatePresence mode="wait">
+        <motion.div key={location.pathname}>
+          <Routes location={location}>
+            <Route path="/" element={<TransitionWrapper><Home /></TransitionWrapper>} />
+            <Route path="/graphic-design" element={<TransitionWrapper><GraphicDesign /></TransitionWrapper>} />
+            <Route path="/photography" element={<TransitionWrapper><Photography /></TransitionWrapper>} />
+            <Route path="/about" element={<TransitionWrapper><About /></TransitionWrapper>} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
+    </>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/graphic-design" element={<GraphicDesign />} />
-        <Route path="/photography" element={<Photography />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

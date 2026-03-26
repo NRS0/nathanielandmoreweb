@@ -30,7 +30,7 @@ export default function About() {
           >
             nathaniel30012@gmail.com
           </a>
-          <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity">
+          <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity" aria-label="Send email">
             <motion.div
               whileHover={{ rotate: 90 }}
               whileTap={{ rotate: 360 }}
@@ -49,6 +49,7 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="w-full flex flex-col items-center"
+          style={{ willChange: 'transform, opacity' }}
         >
           <div className="w-[96%] sm:w-[80%] md:w-[64%] lg:w-[48%] max-w-[512px] mb-20">
             <img 

@@ -36,7 +36,7 @@ export default function GraphicDesign() {
           >
             nathaniel30012@gmail.com
           </a>
-          <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity">
+          <a href="mailto:nathaniel30012@gmail.com" className="cursor-pointer p-4 -m-4 block hover:opacity-70 transition-opacity" aria-label="Send email">
             <motion.div
               whileHover={{ rotate: 90 }}
               whileTap={{ rotate: 360 }}
@@ -59,6 +59,7 @@ export default function GraphicDesign() {
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
               className="group relative aspect-square overflow-hidden"
+              style={{ willChange: 'transform, opacity' }}
             >
               <img 
                 src={img} 
