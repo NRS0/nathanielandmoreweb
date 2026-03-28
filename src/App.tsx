@@ -172,7 +172,8 @@ function Home() {
   const categories = [
     "Graphic Design",
     "Photography",
-    "About"
+    "About",
+    "Ai Studio"
   ];
 
   const socialLinks = [
@@ -291,22 +292,43 @@ function Home() {
                   className="flex flex-col md:flex-row items-center overflow-y-auto md:overflow-x-auto scrollbar-hide max-h-[70vh] md:max-h-none"
                 >
                   <div className="flex flex-col md:flex-row items-center border-b md:border-b-0 md:border-r border-white/10 pb-2 mb-2 md:pb-0 md:mb-0 md:pr-2 md:mr-2">
-                    {categories.map((category, idx) => (
-                      <motion.div
-                        key={category}
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: idx * 0.05 }}
-                      >
-                        <Link
-                          to={category === "Graphic Design" ? "/graphic-design" : (category === "Photography" ? "/photography" : (category === "About" ? "/about" : `#${category.toLowerCase().replace(' ', '-')}`))}
-                          className="px-8 py-5 text-[12px] md:text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all whitespace-nowrap block"
-                          onClick={() => setIsMenuOpen(false)}
+                    {categories.map((category, idx) => {
+                      const isExternal = category === "Ai Studio";
+                      const url = category === "Graphic Design" ? "/graphic-design" : 
+                                  category === "Photography" ? "/photography" : 
+                                  category === "About" ? "/about" : 
+                                  category === "Ai Studio" ? "https://the-produced.vercel.app/" :
+                                  `#${category.toLowerCase().replace(' ', '-')}`;
+                      
+                      return (
+                        <motion.div
+                          key={category}
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: idx * 0.05 }}
                         >
-                          {category}
-                        </Link>
-                      </motion.div>
-                    ))}
+                          {isExternal ? (
+                            <a
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-8 py-5 text-[12px] md:text-[11px] font-bold tracking-widest uppercase hover:text-[#fa003f] active:text-[#fa003f] transition-all whitespace-nowrap block"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {category}
+                            </a>
+                          ) : (
+                            <Link
+                              to={url}
+                              className="px-8 py-5 text-[12px] md:text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all whitespace-nowrap block"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {category}
+                            </Link>
+                          )}
+                        </motion.div>
+                      );
+                    })}
                   </div>
                   <div className="flex flex-col md:flex-row items-center pr-0 md:pr-4 pb-4 md:pb-0">
                     {socialLinks.map((link, idx) => (
@@ -361,26 +383,46 @@ function Home() {
       <div className="w-full p-8 md:p-12 pb-16 md:pb-24 max-w-screen-2xl mx-auto">
         <div className="flex flex-col items-center gap-12 md:gap-16">
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-16">
-            {categories.map((category) => (
-              <div key={category} className="p-1">
-                <Link 
-                  to={category === "Graphic Design" ? "/graphic-design" : (category === "Photography" ? "/photography" : (category === "About" ? "/about" : `#${category.toLowerCase().replace(' ', '-')}`))}
-                  onMouseEnter={() => {
-                    if (category === "Photography") setIsPhotographyHovered(true);
-                    if (category === "Graphic Design") setIsGraphicDesignHovered(true);
-                    if (category === "About") setIsAboutHovered(true);
-                  }}
-                  onMouseLeave={() => {
-                    if (category === "Photography") setIsPhotographyHovered(false);
-                    if (category === "Graphic Design") setIsGraphicDesignHovered(false);
-                    if (category === "About") setIsAboutHovered(false);
-                  }}
-                  className="block p-4 text-sm md:text-base font-bold tracking-[0.4em] hover:text-[#b7ff00] transition-all duration-300 uppercase whitespace-nowrap"
-                >
-                  {category === "Photography" ? "PHOTOGRAPHY" : category}
-                </Link>
-              </div>
-            ))}
+            {categories.map((category) => {
+              const isExternal = category === "Ai Studio";
+              const url = category === "Graphic Design" ? "/graphic-design" : 
+                          category === "Photography" ? "/photography" : 
+                          category === "About" ? "/about" : 
+                          category === "Ai Studio" ? "https://the-produced.vercel.app/" :
+                          `#${category.toLowerCase().replace(' ', '-')}`;
+              
+              return (
+                <div key={category} className="p-1">
+                  {isExternal ? (
+                    <a 
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-4 text-sm md:text-base font-bold tracking-[0.4em] hover:text-[#fa003f] transition-all duration-300 uppercase whitespace-nowrap"
+                    >
+                      {category}
+                    </a>
+                  ) : (
+                    <Link 
+                      to={url}
+                      onMouseEnter={() => {
+                        if (category === "Photography") setIsPhotographyHovered(true);
+                        if (category === "Graphic Design") setIsGraphicDesignHovered(true);
+                        if (category === "About") setIsAboutHovered(true);
+                      }}
+                      onMouseLeave={() => {
+                        if (category === "Photography") setIsPhotographyHovered(false);
+                        if (category === "Graphic Design") setIsGraphicDesignHovered(false);
+                        if (category === "About") setIsAboutHovered(false);
+                      }}
+                      className="block p-4 text-sm md:text-base font-bold tracking-[0.4em] hover:text-[#b7ff00] transition-all duration-300 uppercase whitespace-nowrap"
+                    >
+                      {category === "Photography" ? "PHOTOGRAPHY" : category}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
           </div>
           
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12 opacity-40 hover:opacity-100 transition-opacity duration-500">
