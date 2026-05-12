@@ -10,157 +10,9 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-do
 import GraphicDesign from "./GraphicDesign";
 import Photography from "./Photography";
 import About from "./About";
+import Music from "./Music";
 
-const Preloader = React.memo(function Preloader() {
-  const [phase, setPhase] = useState<'dipping' | 'circular' | 'converging' | 'scattering'>('dipping');
-  const [bgColor, setBgColor] = useState("#FFFFFF");
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setPhase('circular'), 700);
-    const t2 = setTimeout(() => setPhase('converging'), 1300);
-    const t3 = setTimeout(() => setPhase('scattering'), 1600);
-    
-    // Sync background color changes
-    const c1 = setTimeout(() => setBgColor("#FF6321"), 600);
-    const c2 = setTimeout(() => setBgColor("#b7ff00"), 1200);
-
-    return () => {
-      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
-      clearTimeout(c1); clearTimeout(c2);
-    };
-  }, []);
-
-  return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, delay: 0.4 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden pointer-events-none"
-    >
-      {/* The Masked Background */}
-      <motion.div 
-        className="absolute inset-0"
-        animate={{ backgroundColor: bgColor }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-        style={{
-          clipPath: phase === 'scattering' 
-            ? 'circle(0% at 50% 50%)' 
-            : 'circle(150% at 50% 50%)',
-          transition: 'clip-path 0.8s cubic-bezier(0.65, 0, 0.35, 1)',
-          willChange: 'clip-path'
-        }}
-      />
-
-      <motion.div 
-        className="relative flex items-center justify-center z-10"
-        animate={phase !== 'dipping' ? { rotate: 360 } : {}}
-        transition={phase !== 'dipping' ? { duration: 1, repeat: Infinity, ease: "linear" } : {}}
-        style={{ willChange: 'transform' }}
-      >
-        {[0, 1, 2].map((i) => {
-          const angle = (i * 120 * Math.PI) / 180;
-          const radius = 50;
-          const circleX = Math.cos(angle) * radius;
-          const circleY = Math.sin(angle) * radius;
-          
-          const scatterAngle = (i * 120 + 45) * Math.PI / 180;
-          const scatterDistance = 1500;
-          const scatterX = Math.cos(scatterAngle) * scatterDistance;
-          const scatterY = Math.sin(scatterAngle) * scatterDistance;
-
-          let animateProps: any = {};
-          let transitionProps: any = {};
-
-          if (phase === 'dipping') {
-            animateProps = { x: (i - 1) * 60, y: [0, -40, 0], scale: 1, opacity: 1 };
-            transitionProps = { 
-              y: { duration: 0.6, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" },
-              x: { duration: 0.4 },
-              scale: { duration: 0.4 }
-            };
-          } else if (phase === 'circular') {
-            animateProps = { x: circleX, y: circleY, scale: 1, opacity: 1 };
-            transitionProps = { duration: 0.4, ease: "backOut" };
-          } else if (phase === 'converging') {
-            animateProps = { x: 0, y: 0, scale: 1.5, opacity: 1 };
-            transitionProps = { duration: 0.3, ease: "anticipate" };
-          } else if (phase === 'scattering') {
-            animateProps = { x: scatterX, y: scatterY, scale: 0.5, opacity: 0 };
-            transitionProps = { duration: 0.8, ease: "circIn" };
-          }
-
-          return (
-            <motion.div
-              key={i}
-              animate={animateProps}
-              transition={transitionProps}
-              className="absolute w-8 h-8 md:w-10 md:h-10 rounded-full bg-black"
-              style={{ willChange: 'transform, opacity' }}
-            />
-          );
-        })}
-      </motion.div>
-    </motion.div>
-  );
-});
-
-const PageTransitionOverlay = React.memo(function PageTransitionOverlay() {
-  return (
-    <motion.div
-      className="fixed inset-0 z-[9998] pointer-events-none overflow-hidden flex items-center justify-center"
-    >
-      <motion.div
-        className="absolute inset-0 bg-[#b7ff00]"
-        variants={{
-          initial: { clipPath: 'circle(150% at 50% 50%)' },
-          animate: { clipPath: 'circle(0% at 50% 50%)' },
-          exit: { clipPath: 'circle(150% at 50% 50%)' }
-        }}
-        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
-        style={{ willChange: 'clip-path' }}
-      />
-      
-      <div className="relative flex items-center justify-center z-10">
-        {[0, 1, 2].map((i) => {
-          const scatterAngle = (i * 120 + 45) * Math.PI / 180;
-          const scatterDistance = 1500;
-          const scatterX = Math.cos(scatterAngle) * scatterDistance;
-          const scatterY = Math.sin(scatterAngle) * scatterDistance;
-
-          return (
-            <motion.div
-              key={i}
-              className="absolute w-8 h-8 md:w-10 md:h-10 rounded-full bg-black"
-              variants={{
-                initial: { x: 0, y: 0, scale: 1.5, opacity: 1 },
-                animate: { x: scatterX, y: scatterY, scale: 0.5, opacity: 0 },
-                exit: { x: 0, y: 0, scale: 1.5, opacity: 1 }
-              }}
-              transition={{ duration: 0.6, ease: "circInOut" }}
-              style={{ willChange: 'transform, opacity' }}
-            />
-          );
-        })}
-      </div>
-    </motion.div>
-  );
-});
-
-function TransitionWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      className="w-full"
-    >
-      {children}
-      <PageTransitionOverlay />
-    </motion.div>
-  );
-}
-
-function Home() {
+const Home = () => {
   const [isMenuHovered, setIsMenuHovered] = useState(false);
   const [isImageHovered, setIsImageHovered] = useState(false);
   const [isLeftImageHovered, setIsLeftImageHovered] = useState(false);
@@ -168,12 +20,14 @@ function Home() {
   const [isPhotographyHovered, setIsPhotographyHovered] = useState(false);
   const [isGraphicDesignHovered, setIsGraphicDesignHovered] = useState(false);
   const [isAboutHovered, setIsAboutHovered] = useState(false);
+  const [isMusicHovered, setIsMusicHovered] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const categories = [
     "Graphic Design",
     "Photography",
     "About",
-    "Ai Studio"
+    "Ai Studio",
+    "Music"
   ];
 
   const socialLinks = [
@@ -189,6 +43,7 @@ function Home() {
   const photographyHoverImage = "https://i.pinimg.com/736x/37/e5/a9/37e5a93a5f46a47e5060e894df1d98af.jpg";
   const graphicDesignHoverImage = "https://i.pinimg.com/736x/17/29/7a/17297aff063ddfb35504831a5de845b8.jpg";
   const aboutHoverImage = "https://i.pinimg.com/736x/76/8c/0a/768c0aa24b6e60a35f59dd2f88865321.jpg";
+  const musicHoverImage = "https://imglink.cc/cdn/mQAfPOL3So.jpg";
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white flex flex-col relative">
@@ -297,6 +152,7 @@ function Home() {
                       const url = category === "Graphic Design" ? "/graphic-design" : 
                                   category === "Photography" ? "/photography" : 
                                   category === "About" ? "/about" : 
+                                  category === "Music" ? "/music" :
                                   category === "Ai Studio" ? "https://the-produced.vercel.app/" :
                                   `#${category.toLowerCase().replace(' ', '-')}`;
                       
@@ -322,6 +178,18 @@ function Home() {
                               to={url}
                               className="px-8 py-5 text-[12px] md:text-[11px] font-bold tracking-widest uppercase hover:text-[#b7ff00] active:text-[#b7ff00] transition-all whitespace-nowrap block"
                               onClick={() => setIsMenuOpen(false)}
+                              onMouseEnter={() => {
+                                if (category === "Photography") setIsPhotographyHovered(true);
+                                if (category === "Graphic Design") setIsGraphicDesignHovered(true);
+                                if (category === "About") setIsAboutHovered(true);
+                                if (category === "Music") setIsMusicHovered(true);
+                              }}
+                              onMouseLeave={() => {
+                                if (category === "Photography") setIsPhotographyHovered(false);
+                                if (category === "Graphic Design") setIsGraphicDesignHovered(false);
+                                if (category === "About") setIsAboutHovered(false);
+                                if (category === "Music") setIsMusicHovered(false);
+                              }}
                             >
                               {category}
                             </Link>
@@ -365,6 +233,7 @@ function Home() {
               isGraphicDesignHovered ? graphicDesignHoverImage :
               isPhotographyHovered ? photographyHoverImage :
               isAboutHovered ? aboutHoverImage :
+              isMusicHovered ? musicHoverImage :
               isLeftImageHovered ? leftImageHoverImage : 
               isRightImageHovered ? rightImageHoverImage : 
               (isMenuHovered ? menuHoverImage : (isImageHovered ? imageHoverImage : defaultImage))
@@ -372,7 +241,7 @@ function Home() {
             alt="Featured Artwork"
             onMouseEnter={() => setIsImageHovered(true)}
             onMouseLeave={() => setIsImageHovered(false)}
-            className="w-full h-full object-contain block"
+            className={`w-full h-full object-contain block ${isMusicHovered ? 'transition-transform duration-500 scale-[2.5]' : 'scale-100'}`}
             referrerPolicy="no-referrer"
             loading="lazy"
           />
@@ -388,6 +257,7 @@ function Home() {
               const url = category === "Graphic Design" ? "/graphic-design" : 
                           category === "Photography" ? "/photography" : 
                           category === "About" ? "/about" : 
+                          category === "Music" ? "/music" :
                           category === "Ai Studio" ? "https://the-produced.vercel.app/" :
                           `#${category.toLowerCase().replace(' ', '-')}`;
               
@@ -409,11 +279,13 @@ function Home() {
                         if (category === "Photography") setIsPhotographyHovered(true);
                         if (category === "Graphic Design") setIsGraphicDesignHovered(true);
                         if (category === "About") setIsAboutHovered(true);
+                        if (category === "Music") setIsMusicHovered(true);
                       }}
                       onMouseLeave={() => {
                         if (category === "Photography") setIsPhotographyHovered(false);
                         if (category === "Graphic Design") setIsGraphicDesignHovered(false);
                         if (category === "About") setIsAboutHovered(false);
+                        if (category === "Music") setIsMusicHovered(false);
                       }}
                       className="block p-4 text-sm md:text-base font-bold tracking-[0.4em] hover:text-[#b7ff00] transition-all duration-300 uppercase whitespace-nowrap"
                     >
@@ -446,33 +318,15 @@ function Home() {
 
 function AppRoutes() {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Only show preloader on initial entry
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader key="preloader" />}
-      </AnimatePresence>
-      
-      <AnimatePresence mode="wait">
-        <motion.div key={location.pathname}>
-          <Routes location={location}>
-            <Route path="/" element={<TransitionWrapper><Home /></TransitionWrapper>} />
-            <Route path="/graphic-design" element={<TransitionWrapper><GraphicDesign /></TransitionWrapper>} />
-            <Route path="/photography" element={<TransitionWrapper><Photography /></TransitionWrapper>} />
-            <Route path="/about" element={<TransitionWrapper><About /></TransitionWrapper>} />
-          </Routes>
-        </motion.div>
-      </AnimatePresence>
-    </>
+    <Routes location={location}>
+      <Route path="/" element={<Home />} />
+      <Route path="/graphic-design" element={<GraphicDesign />} />
+      <Route path="/photography" element={<Photography />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/music" element={<Music />} />
+    </Routes>
   );
 }
 
