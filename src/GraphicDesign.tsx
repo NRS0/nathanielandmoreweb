@@ -9,8 +9,6 @@ const realImages = [
   "https://i.pinimg.com/736x/c9/94/23/c9942316fdcd913263996395181354cc.jpg",
   "https://i.pinimg.com/736x/76/48/6e/76486e0ad302b8ee302c18b5d195482f.jpg",
   "https://i.pinimg.com/474x/55/e6/62/55e6621b03aef9789f27862036df7178.jpg",
-  "https://i.pinimg.com/736x/54/c6/36/54c636b63f0056572a8b049a755b2c83.jpg",
-  "https://i.pinimg.com/736x/b4/cd/08/b4cd08e46dd76292154b35d52886219d.jpg",
   "https://i.pinimg.com/736x/e7/ab/58/e7ab58edb8bb8838bdf7325a76ace96a.jpg"
 ];
 
@@ -51,25 +49,86 @@ export default function GraphicDesign() {
       {/* Gallery Grid */}
       <main className="flex-grow p-6 md:p-12 lg:p-20 max-w-screen-2xl mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {realImages.map((img, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative aspect-square overflow-hidden"
-              style={{ willChange: 'transform, opacity' }}
-            >
-              <img 
-                src={img} 
-                alt={`Graphic Design Project ${index + 1}`}
-                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-                loading="lazy"
-              />
-            </motion.div>
-          ))}
+          {realImages.map((img, index) => {
+            const isFirst = index === 0;
+            const isLast = index === realImages.length - 1;
+
+            if (isFirst) {
+              return (
+                <Link
+                  key={index}
+                  id="first-graphic-design-project"
+                  to="/graphic-design/art-direction"
+                  className="block cursor-pointer"
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group relative aspect-square overflow-hidden"
+                    style={{ willChange: 'transform, opacity' }}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`Graphic Design Project ${index + 1}`}
+                      className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                    />
+                  </motion.div>
+                </Link>
+              );
+            }
+
+            if (isLast) {
+              return (
+                <Link
+                  key={index}
+                  id="last-graphic-design-project"
+                  to="/graphic-design/project"
+                  className="block cursor-pointer"
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group relative aspect-square overflow-hidden"
+                    style={{ willChange: 'transform, opacity' }}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`Graphic Design Project ${index + 1}`}
+                      className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                    />
+                  </motion.div>
+                </Link>
+              );
+            }
+
+            return (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative aspect-square overflow-hidden"
+                style={{ willChange: 'transform, opacity' }}
+              >
+                <img 
+                  src={img} 
+                  alt={`Graphic Design Project ${index + 1}`}
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
+              </motion.div>
+            );
+          })}
         </div>
       </main>
 

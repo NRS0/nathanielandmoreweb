@@ -8,6 +8,8 @@ import { Plus, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import GraphicDesign from "./GraphicDesign";
+import GraphicProject from "./GraphicProject";
+import ArtDirectionProject from "./ArtDirectionProject";
 import Photography from "./Photography";
 import About from "./About";
 import Music from "./Music";
@@ -323,6 +325,8 @@ function AppRoutes() {
     <Routes location={location}>
       <Route path="/" element={<Home />} />
       <Route path="/graphic-design" element={<GraphicDesign />} />
+      <Route path="/graphic-design/art-direction" element={<ArtDirectionProject />} />
+      <Route path="/graphic-design/project" element={<GraphicProject />} />
       <Route path="/photography" element={<Photography />} />
       <Route path="/about" element={<About />} />
       <Route path="/music" element={<Music />} />
