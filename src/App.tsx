@@ -13,6 +13,7 @@ import ArtDirectionProject from "./ArtDirectionProject";
 import Photography from "./Photography";
 import About from "./About";
 import Music from "./Music";
+import MouseEffects from "./MouseEffects";
 
 const Home = () => {
   const [isMenuHovered, setIsMenuHovered] = useState(false);
@@ -337,6 +338,9 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
+      <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
+        <MouseEffects color="#FF6321" interactionMode="wavy" showLabel={false} />
+      </div>
       <AppRoutes />
     </BrowserRouter>
   );
